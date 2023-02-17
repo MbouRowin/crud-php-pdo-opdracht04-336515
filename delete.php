@@ -9,10 +9,10 @@ if (!$id) {
     die();
 }
 
-$stmt = $pdo->prepare("DELETE FROM achtbaan WHERE id = ?");
+$stmt = $pdo->prepare("DELETE FROM afspraak WHERE id = ?");
 $stmt->bindValue(1, $id);
 
 $stmt->execute();
 
 header("Refresh: 2; url=/read.php");
-die("De achtbaan is verwijderd.");
+die("De afspraak is verwijderd.");
