@@ -34,64 +34,69 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bling Bling Nagelstudio Chantal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <h1 class="text-center">Bling Bling Nagelstudio Chantal</h1>
-        <a href="read.php">Read</a>
+        <div>
+            <h1>Bling Bling Nagelstudio Chantal</h1>
+            <a href="read.php">Read</a>
 
-        <form method="post">
-            <div class="mb-3">
-                <label for="achtbaan" class="form-label">Naam Achtbaan</label>
-                <input type="text" name="achtbaan" id="achtbaan" class="form-control">
-            </div>
+            <form method="post" class="mt-1">
+                <div>
+                    Kies 4 basiskleuren voor uw nagels:
+                    <div class="row mt-1">
+                        <input type="color" name="kleur-1" value="#ff0000">
+                        <input type="color" name="kleur-2" value="#ffffff">
+                        <input type="color" name="kleur-3" value="#0000ff">
+                        <input type="color" name="kleur-4" value="#ffa500">
+                    </div>
+                </div>
 
-            <div class="mb-3">
-                <label for="pretpark" class="form-label">Naam Pretpark</label>
-                <input type="text" name="pretpark" id="pretpark" class="form-control">
-            </div>
+                <div class="mt-1">
+                    <label for="tel" class="block">Uw telefoonnummer:</label>
+                    <input type="tel" name="tel" id="tel" class="input" pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="land" class="form-label">Naam Land</label>
-                <input type="text" name="land" id="land" class="form-control">
-            </div>
+                <div class="mt-1">
+                    <label for="email" class="block">Uw e-mailadres:</label>
+                    <input type="email" name="email" id="email" class="input" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="topsnelheid" class="form-label">Topsnelheid (km/u)</label>
-                <input type="number" min="1" max="200" name="topsnelheid" id="topsnelheid" class="form-control">
-            </div>
+                <div class="mt-1">
+                    <label for="land" class="block">Afspraak datum:</label>
+                    <input type="datetime-local" name="datum" id="datum" class="input" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="hoogte" class="form-label">Hoogte</label>
-                <input type="number" min="1" max="200" name="hoogte" id="hoogte" class="form-control">
-            </div>
+                <div class="mt-1">
+                    Soort behandeling:
 
-            <div class="mb-3">
-                <label for="opening" class="form-label">Datum eerste opening</label>
-                <input type="date" name="opening" id="opening" class="form-control">
-            </div>
+                    <div class="mt-1">
+                        <input type="checkbox" name="nagelbijt" id="nagelbijt">
+                        <label for="nagelbijt" class="">Nagelbijt arrangement (termijnbetaling mogelijk) $180</label>
+                    </div>
 
-            <div class="mb-3">
-                <label for="cijfer" class="form-label">Cijfer voor achtbaan</label>
-                <input type="range" min="1" max="10" step="0.1" name="cijfer" id="cijfer" class="form-range">
-                <p id="cijfer-value"></p>
-            </div>
+                    <div class="mt-1">
+                        <input type="checkbox" name="manicure" id="manicure">
+                        <label for="manicure" class="">Luxe manicure (massage en handpakking) $30</label>
+                    </div>
 
-            <div class="d-grid">
-                <button class="btn btn-primary">Sla op</button>
-            </div>
-        </form>
+                    <div class="mt-1">
+                        <input type="checkbox" name="reparatie" id="reparatie">
+                        <label for="reparatie" class="">Nagelreparatie per nagel (in eerste week gratis) $5</label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="now" value="123456">
+
+                <div class="row mt-1">
+                    <button class="button">Sla op</button>
+                    <button type="reset" class="button">Reset</button>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-        const cijfer = document.getElementById("cijfer");
-        const cijferValue = document.getElementById("cijfer-value");
-        cijferValue.innerHTML = cijfer.value;
-        cijfer.addEventListener("input", () => cijferValue.innerHTML = cijfer.value);
-    </script>
 </body>
 
 </html>
