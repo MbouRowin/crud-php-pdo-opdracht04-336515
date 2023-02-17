@@ -3,20 +3,17 @@
 require_once "database.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $kleur1 = $_POST["kleur1"] ?? "";
-    $kleur2 = $_POST["kleur2"] ?? "";
-    $kleur3 = $_POST["kleur3"] ?? "";
-    $kleur4 = $_POST["kleur4"] ?? "";
+    $kleur1 = $_POST["kleur-1"] ?? "";
+    $kleur2 = $_POST["kleur-2"] ?? "";
+    $kleur3 = $_POST["kleur-3"] ?? "";
+    $kleur4 = $_POST["kleur-4"] ?? "";
     $basiskleuren = implode(", ", [$kleur1, $kleur2, $kleur3, $kleur4]);
-
     $tel = $_POST["tel"] ?? "";
     $email = $_POST["email"] ?? "";
-    $afspraakdatum = $_POST["afspraakdatum"] ?? "";
-
+    $afspraakdatum = $_POST["datum"] ?? "";
     $behandeling = $_POST["behandeling"] ?? [];
     $behandeling = implode(", ", $behandeling);
-
-    $datum = $_POST["datum"] ?? "";
+    $now = $_POST["now"] ?? "";
 
     $stmt = $pdo->prepare("INSERT INTO afspraak VALUES (NULL, ?, ?, ?, ?, ?, ?)");
     $stmt->bindValue(1, $basiskleuren);
@@ -24,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bindValue(3, $email);
     $stmt->bindValue(4, $afspraakdatum);
     $stmt->bindValue(5, $behandeling);
-    $stmt->bindValue(6, $datum);
+    $stmt->bindValue(6, $now);
 
     $stmt->execute();
 
@@ -94,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </div>
 
-                <input type="hidden" name="now" value="123456">
+                <input type="hidden" name="now" value="<?= date(DATE_RFC2822); ?>">
 
                 <div class="row mt-1">
                     <button class="button">Sla op</button>
