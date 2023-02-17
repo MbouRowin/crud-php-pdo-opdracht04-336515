@@ -2,7 +2,7 @@
 
 require_once "database.php";
 
-$stmt = $pdo->query("SELECT * from achtbaan ORDER BY Topsnelheid DESC");
+$stmt = $pdo->query("SELECT * from afspraak ORDER BY afspraakdatum DESC");
 
 ?>
 <!doctype html>
@@ -17,32 +17,30 @@ $stmt = $pdo->query("SELECT * from achtbaan ORDER BY Topsnelheid DESC");
 
 <body>
     <div class="container">
-        <h1 class="text-center">Achtbanen</h1>
+        <h1 class="text-center">Afspraken</h1>
         <a href="index.php">Create</a>
 
         <table class="table">
             <tr>
                 <th>ID</th>
-                <th>Achtbaan</th>
-                <th>Pretpark</th>
-                <th>Land</th>
-                <th>Topsnelheid</th>
-                <th>Hoogte</th>
-                <th>Openingsdatum</th>
-                <th>Cijfer</th>
+                <th>Basiskleuren</th>
+                <th>Telefoonnummer</th>
+                <th>Email</th>
+                <th>Afspraakdatum</th>
+                <th>Behandeling</th>
+                <th>Datum</th>
             </tr>
             <?php while ($row = $stmt->fetch()) : ?>
                 <tr>
-                    <td><?= htmlspecialchars($row["Id"]) ?></td>
-                    <td><?= htmlspecialchars($row["NaamAchtbaan"]) ?></td>
-                    <td><?= htmlspecialchars($row["NaamPretpark"]) ?></td>
-                    <td><?= htmlspecialchars($row["Land"]) ?></td>
-                    <td><?= htmlspecialchars($row["Topsnelheid"]) ?></td>
-                    <td><?= htmlspecialchars($row["Hoogte"]) ?></td>
-                    <td><?= htmlspecialchars($row["Datum"]) ?></td>
-                    <td><?= htmlspecialchars($row["Cijfer"]) ?></td>
-                    <td><a href="update.php?id=<?= $row["Id"] ?>">Update</a></td>
-                    <td><a href="delete.php?id=<?= $row["Id"] ?>">Delete</a></td>
+                    <td><?= htmlspecialchars($row["id"]) ?></td>
+                    <td><?= htmlspecialchars($row["basiskleuren"]) ?></td>
+                    <td><?= htmlspecialchars($row["tel"]) ?></td>
+                    <td><?= htmlspecialchars($row["email"]) ?></td>
+                    <td><?= htmlspecialchars($row["afspraakdatum"]) ?></td>
+                    <td><?= htmlspecialchars($row["behandeling"]) ?></td>
+                    <td><?= htmlspecialchars($row["datum"]) ?></td>
+                    <td><a href="update.php?id=<?= $row["id"] ?>">Update</a></td>
+                    <td><a href="delete.php?id=<?= $row["id"] ?>">Delete</a></td>
                 </tr>
             <?php endwhile ?>
         </table>
