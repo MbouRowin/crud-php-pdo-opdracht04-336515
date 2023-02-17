@@ -3,27 +3,33 @@
 require_once "database.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $achtbaan = $_POST["achtbaan"] ?? "";
-    $pretpark = $_POST["pretpark"] ?? "";
-    $land = $_POST["land"] ?? "";
-    $topsnelheid = $_POST["topsnelheid"] ?? "";
-    $hoogte = $_POST["hoogte"] ?? "";
-    $opening = $_POST["opening"] ?? "";
-    $cijfer = $_POST["cijfer"] ?? "";
+    $kleur1 = $_POST["kleur1"] ?? "";
+    $kleur2 = $_POST["kleur2"] ?? "";
+    $kleur3 = $_POST["kleur3"] ?? "";
+    $kleur4 = $_POST["kleur4"] ?? "";
+    $basiskleuren = implode(", ", [$kleur1, $kleur2, $kleur3, $kleur4]);
 
-    $stmt = $pdo->prepare("INSERT INTO achtbaan VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bindValue(1, $achtbaan);
-    $stmt->bindValue(2, $pretpark);
-    $stmt->bindValue(3, $land);
-    $stmt->bindValue(4, $topsnelheid);
-    $stmt->bindValue(5, $hoogte);
-    $stmt->bindValue(6, $opening);
-    $stmt->bindValue(7, $cijfer);
+    $tel = $_POST["tel"] ?? "";
+    $email = $_POST["email"] ?? "";
+    $afspraakdatum = $_POST["afspraakdatum"] ?? "";
+
+    $behandeling = $_POST["behandeling"] ?? [];
+    $behandeling = implode(", ", $behandeling);
+
+    $datum = $_POST["datum"] ?? "";
+
+    $stmt = $pdo->prepare("INSERT INTO afspraak VALUES (NULL, ?, ?, ?, ?, ?, ?)");
+    $stmt->bindValue(1, $basiskleuren);
+    $stmt->bindValue(2, $tel);
+    $stmt->bindValue(3, $email);
+    $stmt->bindValue(4, $afspraakdatum);
+    $stmt->bindValue(5, $behandeling);
+    $stmt->bindValue(6, $datum);
 
     $stmt->execute();
 
     header("Refresh: 2; url=/read.php");
-    die("De achtbaan is aangemaakt.");
+    die("De afspraak is aangemaakt.");
 }
 
 ?>
@@ -73,17 +79,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     Soort behandeling:
 
                     <div class="mt-1">
-                        <input type="checkbox" name="nagelbijt" id="nagelbijt">
+                        <input type="checkbox" name="behandeling[]" value="Nagelbijt" id="nagelbijt">
                         <label for="nagelbijt" class="">Nagelbijt arrangement (termijnbetaling mogelijk) $180</label>
                     </div>
 
                     <div class="mt-1">
-                        <input type="checkbox" name="manicure" id="manicure">
+                        <input type="checkbox" name="behandeling[]" value="Luxe manicure" id="manicure">
                         <label for="manicure" class="">Luxe manicure (massage en handpakking) $30</label>
                     </div>
 
                     <div class="mt-1">
-                        <input type="checkbox" name="reparatie" id="reparatie">
+                        <input type="checkbox" name="behandeling[]" value="Nagelreparatie" id="reparatie">
                         <label for="reparatie" class="">Nagelreparatie per nagel (in eerste week gratis) $5</label>
                     </div>
                 </div>
